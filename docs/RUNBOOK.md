@@ -197,7 +197,7 @@ mkdir -p docs
 - `src/main.jsx` — `<BrowserRouter><CartProvider><App /></CartProvider></BrowserRouter>`
 - `src/index.css` — global reset (`box-sizing`, `margin: 0`, base font)
 
-### 4.3 Configure Vitest and write tests
+### 4.3 Configure Vitest and write unit/component tests
 
 **Config:**
 ```js
@@ -206,6 +206,7 @@ test: {
   environment: 'jsdom',
   setupFiles: ['./src/test/setup.js'],
   globals: true,
+  include: ['src/**/*.test.{js,jsx}'],  // REQUIRED: prevents Vitest scanning e2e/ and features/
 },
 ```
 
@@ -237,58 +238,188 @@ test: {
 render the same dollar value. `getByText('$X.XX')` throws "multiple elements found." Use
 `getAllByText('$X.XX').length >= 1` instead.
 
+### 4.3b Add Playwright E2E tests
+
+```bash
+npm install -D @playwright/test
+npx playwright install --with-deps chromium   # skip on macOS 13 — use channel:'chrome' instead
+```
+
+On **macOS 13**, Playwright cannot download browser binaries. Use `channel: 'chrome'` (system Chrome):
+
+```js
+// playwright.config.js
+import { defineConfig, devices } from '@playwright/test';
+export default defineConfig({
+  testDir: './e2e',
+  use: { baseURL: 'http://localhost:5173', channel: 'chrome' },
+  webServer: { command: 'npm run dev', url: 'http://localhost:5173', reuseExistingServer: true },
+});
+```
+
+Write `e2e/sampleshop.spec.js` — 23 tests covering all pages and flows.
+
+**package.json scripts — add:**
+```json
+"test:e2e": "playwright test",
+"test:e2e:report": "playwright show-report"
+```
+
+### 4.3c Add Cucumber BDD tests
+
+```bash
+npm install -D @cucumber/cucumber
+```
+
+Create `cucumber.json` at the project root. **Important:** `package.json` has `"type": "module"`,
+so use `"import"` (not `"require"`) in cucumber.json — Cucumber v9+ ESM requirement:
+
+```json
+{
+  "default": {
+    "paths": ["features/**/*.feature"],
+    "import": [
+      "features/support/**/*.js",
+      "features/step_definitions/**/*.js"
+    ],
+    "format": ["progress-bar", "json:reports/cucumber-report.json"],
+    "parallel": 1
+  }
+}
+```
+
+Create directory structure:
+```bash
+mkdir -p features/{support,step_definitions}
+```
+
+**`features/support/world.js`** — Custom World class (browser lifecycle):
+```js
+import { setWorldConstructor, World } from '@cucumber/cucumber';
+import { chromium } from '@playwright/test';
+
+class SampleShopWorld extends World {
+  constructor(options) {
+    super(options);
+    this.baseUrl = 'http://localhost:5173';
+    this.browser = null; this.context = null; this.page = null;
+  }
+  async openBrowser() {
+    this.browser = await chromium.launch({ channel: 'chrome', headless: true });
+    this.context = await this.browser.newContext();
+    this.page = await this.context.newPage();
+  }
+  async closeBrowser() {
+    if (this.browser) { await this.browser.close(); this.browser = null; }
+  }
+  async go(path = '/') { await this.page.goto(`${this.baseUrl}${path}`); }
+}
+setWorldConstructor(SampleShopWorld);
+```
+
+**`features/support/hooks.js`** — Lifecycle hooks (auto-starts dev server, clears cart):
+```js
+import { Before, After, BeforeAll, AfterAll, setDefaultTimeout } from '@cucumber/cucumber';
+import { spawn } from 'child_process';
+
+setDefaultTimeout(30_000);
+let devServer = null;
+
+BeforeAll(async function () {
+  let running = false;
+  for (let i = 0; i < 15; i++) {
+    try { await fetch('http://localhost:5173'); running = true; break; }
+    catch {
+      if (i === 0) devServer = spawn('npm', ['run', 'dev'], { cwd: process.cwd(), stdio: 'ignore' });
+      await new Promise((r) => setTimeout(r, 1000));
+    }
+  }
+  if (!running) throw new Error('Dev server did not start within 15 seconds');
+});
+
+AfterAll(async function () { if (devServer) { devServer.kill('SIGTERM'); devServer = null; } });
+
+Before(async function () {
+  await this.openBrowser();
+  await this.go('/');
+  await this.page.evaluate(() => localStorage.removeItem('sample-shop-cart'));
+});
+
+After(async function (scenario) {
+  if (scenario.result?.status === 'FAILED' && this.page) {
+    try { const screenshot = await this.page.screenshot({ fullPage: true }); this.attach(screenshot, 'image/png'); } catch {}
+  }
+  await this.closeBrowser();
+});
+```
+
+Write 4 feature files and their step definitions:
+- `features/header.feature` (3 scenarios)
+- `features/product_list.feature` (6 scenarios)
+- `features/product_details.feature` (8 scenarios)
+- `features/cart.feature` (6 scenarios)
+- `features/step_definitions/common_steps.js`, `header_steps.js`, `product_list_steps.js`, `product_details_steps.js`, `cart_steps.js`
+
+**package.json scripts — add:**
+```json
+"test:bdd": "cucumber-js",
+"test:bdd:report": "cucumber-js --format json:reports/cucumber-report.json"
+```
+
+**Known gotcha — Vitest picking up e2e/features after installing Cucumber:**
+After `npm install -D @cucumber/cucumber`, `npm run test` may fail because Vitest starts
+scanning `e2e/` and `features/`. Fix: ensure `include: ['src/**/*.test.{js,jsx}']` is set
+in `vite.config.js` test config (added in section 4.3 above).
+
 ### 4.4 Verify (automated)
 
 ```bash
 export NVM_DIR="$HOME/.nvm" && \. "$NVM_DIR/nvm.sh"
 cd /Users/muzzy/gitRepo002
-npm run test     # must show: Tests 19 passed (19)
-npm run build    # must show: ✓ built in <time>ms, 0 errors
+npm run test         # must show: Tests 19 passed (19)
+npm run build        # must show: ✓ built in <time>ms, 0 errors
+npm run test:e2e     # must show: 23 passed
+npm run test:bdd     # must show: 23 scenarios (23 passed)
 ```
 
-### 4.5 Browser verification (manual / automated)
+### 4.5 Browser verification
 
-Start the dev server in the background:
+The Playwright E2E suite (`npm run test:e2e`) and Cucumber BDD suite (`npm run test:bdd`)
+both provide full browser-driven verification using system Chrome (`channel: 'chrome'`).
+Running both is sufficient for browser verification.
+
+If you need a quick manual check, start the dev server and open the app:
 ```bash
 export NVM_DIR="$HOME/.nvm" && \. "$NVM_DIR/nvm.sh"
-npm run dev &> /tmp/vite-dev.log &
-# ready at http://localhost:5173
+npm run dev
+# Open http://localhost:5173 in a browser
 ```
 
-**Browser automation on macOS 13:**
-Playwright cannot download Chromium on macOS 13 (`ERROR: Playwright does not support
-chromium on mac13`). Use `puppeteer-core` with the installed system Chrome instead:
+**macOS 13 note:** Playwright cannot download Chromium (`ERROR: Playwright does not support
+chromium on mac13`). Both E2E and BDD suites work around this with `channel: 'chrome'`,
+which uses the system-installed Google Chrome at
+`/Applications/Google Chrome.app/Contents/MacOS/Google Chrome`.
 
+If you need a standalone one-off browser check (no Playwright), use `puppeteer-core`:
 ```bash
 cd /tmp && npm install puppeteer-core
+# Write a CJS script using executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
 ```
 
-Write a CJS test script (`/tmp/test-sampleshop.cjs`) that uses:
-```js
-const puppeteer = require('/tmp/node_modules/puppeteer-core');
-const browser = await puppeteer.launch({
-  executablePath: '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome',
-  headless: true,
-  args: ['--no-sandbox', '--disable-setuid-sandbox'],
-});
-```
+**10 core flows verified (covered by both Playwright and Cucumber):**
 
-**10 browser checks performed and passed:**
-
-| # | Check | Expected |
-|---|-------|----------|
-| 1 | Product List renders | heading "Products", 10 cards, search box, category select |
-| 2 | Search filter | "yoga" → 1 card |
+| # | Flow | Expected |
+|---|------|----------|
+| 1 | Product List renders | 10 cards, search box, category select |
+| 2 | Search filter | "Wireless" → Headphones; Yoga Mat hidden |
 | 3 | Category filter | "Electronics" → 3 cards |
 | 4 | Product Details | name, price, Add to Cart + Buy Now buttons |
 | 5 | Add to Cart → badge | header badge shows "1" |
-| 6 | Cart with item | "Your Cart", 1 row, Checkout button |
+| 6 | Cart with item | product listed, Checkout button |
 | 7 | Remove → empty cart | "Your cart is empty." message |
-| 8 | Out-of-stock product | "Out of stock" label, 0 action buttons |
+| 8 | Out-of-stock product | "Out of stock" label, no action buttons |
 | 9 | Unknown product id | "Product not found." with back link |
-| 10 | Buy Now | URL ends with `/cart` after click |
-
-Screenshots saved to `/tmp/sampleshop-screenshots/`.
+| 10 | Buy Now | URL becomes `/cart` after click |
 
 ### 4.6 Git init, commit, push
 
@@ -376,7 +507,7 @@ Create 5 Claude Code skills in `.claude/skills/` to replace manual runbook execu
 
 | Skill | Trigger | What it does |
 |-------|---------|--------------|
-| `run-tests` | "run tests", "verify" | Vitest 19 + Playwright 23 tests |
+| `run-tests` | "run tests", "verify" | Vitest 19 + Playwright 23 + Cucumber 23 |
 | `dev` | "start the app", "run it" | Start Vite dev server, open browser |
 | `deploy` | "push to github", "deploy" | Test → build → commit → push |
 | `sync-docs` | "update google drive", "sync docs" | Upload all 6 docs to Drive |
@@ -406,7 +537,7 @@ build status, skills created (5), any open follow-ups.
 | Dev server | `npm run dev` → http://localhost:5173/ |
 | Tech stack | React 19 + Vite 8, react-router-dom v7, Context + localStorage, Vitest 4 + RTL |
 | Pages | `/` (Product List), `/products/:id` (Product Details), `/cart` (Cart) |
-| Tests | 19 unit (Vitest, 4 files) + 23 e2e (Playwright, system Chrome) |
+| Tests | 19 unit (Vitest) + 23 e2e (Playwright) + 23 BDD (Cucumber) — all system Chrome |
 | Skills | 5 — run-tests, dev, deploy, sync-docs, build-app |
 | Node | v24.19.0 via nvm |
 | gh CLI | v2.97.0 at `~/bin/gh` |
@@ -436,7 +567,12 @@ A complete log of what was done in the session that produced this instance:
 17. **Updated RUNBOOK** with full session details; committed and pushed
 18. **Added Playwright** e2e tests (`e2e/sampleshop.spec.js`, 23 tests); committed and pushed
 19. **Created 5 project skills**: `run-tests`, `dev`, `deploy`, `sync-docs`, `build-app` in `.claude/skills/`
-20. **Updated all documentation** and synced to Google Drive
+20. **Built SkillsFlowDiagram**: `docs/SkillsFlowDiagram.md` — 4 Mermaid diagrams showing skill interactions, data flow, and build phases
+21. **Added Playwright e2e suite** — `playwright.config.js` + `e2e/sampleshop.spec.js` (23 tests); `channel: 'chrome'` for macOS 13; `webServer` auto-starts dev server
+22. **Added Cucumber BDD suite** — `cucumber.json`, `features/support/world.js` + `hooks.js`, 4 feature files, 5 step definition files (23 scenarios); ESM `import` key in cucumber.json; `vite.config.js` `include` fix to prevent Vitest scanning e2e/features
+23. **Added platform note** everywhere — `**Agent:** Mac terminal Claude Code agent (macOS 13 Ventura)` added to all 6 docs and Drive docs; committed as `d5a7b61`
+24. **Updated Drive** — trashed old docs; recreated all 5 (PRD, TestCases, TestRunReport, TDD, TestPlan) with updated content; Runbook and SkillsFlowDiagram already current
+25. **Updated RUNBOOK** with full BDD setup, Playwright E2E, browser verification section, and this summary
 
 ---
 
