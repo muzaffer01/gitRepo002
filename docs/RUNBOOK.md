@@ -6,6 +6,7 @@ end-to-end in **auto mode** (no clarifying questions, no permission prompts) on 
 without needing to re-derive scope from scratch.
 
 **Last updated:** 2026-08-17
+**Platform:** macOS 13 (Ventura) — Mac terminal Claude Code agent
 
 ---
 
@@ -369,10 +370,27 @@ Verify:
 4. To update an existing doc: trash the old one first (`mcp__claude_ai_Google_Drive__trash_file`
    with its `fileId`), then create the new version.
 
-### 4.8 Report back
+### 4.8 Create project skills
 
-Summarize: local path, GitHub URL, Drive folder, test results (19/19), build status,
-browser checks (10/10), any open follow-ups (DEF-001: no stock enforcement on Cart page).
+Create 5 Claude Code skills in `.claude/skills/` to replace manual runbook execution:
+
+| Skill | Trigger | What it does |
+|-------|---------|--------------|
+| `run-tests` | "run tests", "verify" | Vitest 19 + Playwright 23 tests |
+| `dev` | "start the app", "run it" | Start Vite dev server, open browser |
+| `deploy` | "push to github", "deploy" | Test → build → commit → push |
+| `sync-docs` | "update google drive", "sync docs" | Upload all 6 docs to Drive |
+| `build-app` | "rebuild", "run the runbook" | Full end-to-end project rebuild |
+
+Each skill lives at `.claude/skills/<name>/SKILL.md`. Commit and push them:
+```bash
+git add .claude && git commit -m "Add project skills" && git push
+```
+
+### 4.9 Report back
+
+Summarize: local path, GitHub URL, Drive folder, test results (19/19 unit + 23/23 e2e),
+build status, skills created (5), any open follow-ups.
 
 ---
 
@@ -388,7 +406,8 @@ browser checks (10/10), any open follow-ups (DEF-001: no stock enforcement on Ca
 | Dev server | `npm run dev` → http://localhost:5173/ |
 | Tech stack | React 19 + Vite 8, react-router-dom v7, Context + localStorage, Vitest 4 + RTL |
 | Pages | `/` (Product List), `/products/:id` (Product Details), `/cart` (Cart) |
-| Tests | 19 automated (4 files) + 10 browser checks |
+| Tests | 19 unit (Vitest, 4 files) + 23 e2e (Playwright, system Chrome) |
+| Skills | 5 — run-tests, dev, deploy, sync-docs, build-app |
 | Node | v24.19.0 via nvm |
 | gh CLI | v2.97.0 at `~/bin/gh` |
 
@@ -414,7 +433,10 @@ A complete log of what was done in the session that produced this instance:
 14. **Created** "Sample002 Project" folder in Google Drive (My Drive)
 15. **Uploaded** all 6 docs to Drive via MCP Google Drive tools
 16. **Started dev server** (`npm run dev`) and ran 10 browser checks via puppeteer-core + system Chrome
-17. **Updated RUNBOOK** with full session details (this edit); committed and pushed
+17. **Updated RUNBOOK** with full session details; committed and pushed
+18. **Added Playwright** e2e tests (`e2e/sampleshop.spec.js`, 23 tests); committed and pushed
+19. **Created 5 project skills**: `run-tests`, `dev`, `deploy`, `sync-docs`, `build-app` in `.claude/skills/`
+20. **Updated all documentation** and synced to Google Drive
 
 ---
 
