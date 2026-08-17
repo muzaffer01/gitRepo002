@@ -4,6 +4,7 @@
 **Author:** Muzaffer
 **Date:** 2026-08-17
 **Related:** Product Requirements Document (PRD) — Phase 1
+**Agent:** Mac terminal Claude Code agent (macOS 13 Ventura)
 
 ---
 

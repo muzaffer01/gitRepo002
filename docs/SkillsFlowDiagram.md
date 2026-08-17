@@ -1,6 +1,8 @@
 # SampleShop — Skills Flow Diagram
 
 > How the 5 project skills interact with each other, the app, and external systems.
+>
+> **Agent:** Mac terminal Claude Code agent (macOS 13 Ventura)
 
 ---
 

@@ -3,6 +3,7 @@
 
 **Author:** Muzaffer
 **Date:** 2026-08-17
+**Agent:** Mac terminal Claude Code agent (macOS 13 Ventura)
 
 Automated cases reference their test file under `src/test/`. Manual cases cover flows
 not covered by the automated suite.
