@@ -50,6 +50,7 @@ If re-running for a **new** project, substitute new paths/URLs/names and follow 
   button on `https://github.com/login/device` rejects scripted clicks — hand it to the user.
 - **Verify with browser, not just tests.** Run the dev server and drive the app with
   browser automation before calling it done.
+- **Documentation lives in `docs/` and GitHub only.** Do NOT sync to Google Drive or any other cloud storage.
 
 ---
 
