@@ -31,7 +31,9 @@ Browser
 | State | React Context API | Cart state is small and global; no need for Redux/Zustand at this scale |
 | Persistence | Browser localStorage | Simplest option that survives page reloads without a backend |
 | Styling | Plain CSS per component | No CSS framework dependency; keeps bundle small |
-| Testing | Vitest + React Testing Library | Fast, Vite-native test runner; RTL encourages testing user-visible behavior |
+| Testing — unit/component (TDD) | Vitest + React Testing Library | Fast, Vite-native test runner; RTL encourages testing user-visible behavior |
+| Testing — e2e | Playwright | Drives the real app in system Chrome; catches routing and integration issues |
+| Testing — BDD | Cucumber.js + Playwright | Gherkin feature files describe user behaviour; step definitions use Playwright to drive the browser |
 
 ## 3. Project Structure
 
@@ -57,6 +59,23 @@ src/
     Cart.test.jsx
   App.jsx                    Route definitions
   main.jsx                   App entry point, provider wiring
+e2e/
+  sampleshop.spec.js         23 Playwright e2e tests (system Chrome, channel:'chrome')
+features/                    BDD Cucumber feature files + step definitions
+  support/
+    world.js                 CustomWorld — browser open/close helpers
+    hooks.js                 BeforeAll/Before/After lifecycle (dev server + browser)
+  step_definitions/
+    common_steps.js          Shared navigation and text-assertion steps
+    header_steps.js          Header-specific step definitions
+    product_list_steps.js    Product list step definitions
+    product_details_steps.js Product details step definitions
+    cart_steps.js            Cart step definitions
+  header.feature             3 BDD scenarios — header navigation
+  product_list.feature       6 BDD scenarios — browse, search, filter
+  product_details.feature    8 BDD scenarios — detail view, add to cart, buy now
+  cart.feature               6 BDD scenarios — cart management
+cucumber.json                Cucumber config (paths, import, format)
 docs/
   PRD.md
   TDD.md
@@ -64,6 +83,7 @@ docs/
   TestCases.md
   TestRunReport.md
   RUNBOOK.md
+  SkillsFlowDiagram.md
 ```
 
 ## 4. Data Model
@@ -131,12 +151,32 @@ a `useEffect` on every change, so it survives page reloads within the same brows
 
 ## 8. Testing Strategy
 
-- Component tests with Vitest + React Testing Library, run via `npm run test`.
-- Pages are tested through `MemoryRouter` (+ `Routes` where param/navigation behavior is
-  under test) and a real `CartProvider`, so behavior is verified end-to-end at the
-  component level rather than mocking context.
-- `localStorage` is cleared between tests and seeded directly where a pre-populated cart
-  is needed, avoiding brittle multi-step UI setup.
+Three automated test layers run in parallel, all required to pass before merging:
+
+### TDD — Unit / Component (Vitest + RTL)
+- `npm run test` — 19 tests across 4 files (Header, ProductList, ProductDetails, Cart)
+- Pages are tested through `MemoryRouter` (+ `Routes`) and a real `CartProvider`
+- `localStorage` is cleared in `beforeEach`; pre-populated via direct seeding
+
+### E2E — End-to-End (Playwright)
+- `npm run test:e2e` — 23 tests driving the live app in system Chrome (`channel: 'chrome'`)
+- Playwright auto-starts `npm run dev` via `webServer` if not already running
+- Covers all pages: Product List, Product Details, Cart, Header
+
+### BDD — Behaviour-Driven (Cucumber.js + Playwright)
+- `npm run test:bdd` — 23 scenarios written in Gherkin across 4 feature files
+- Feature files in `features/*.feature` describe user intent in plain English
+- Step definitions (`features/step_definitions/`) use Playwright with system Chrome
+- A custom World class (`features/support/world.js`) manages browser lifecycle
+- BeforeAll hook auto-starts `npm run dev` if not running; Before hook clears cart state
+- Scenarios cover the same flows as Playwright e2e, expressed as Given/When/Then
+
+### Test command summary
+| Command | Suite | Count |
+|---------|-------|-------|
+| `npm run test` | Vitest unit/component | 19 tests |
+| `npm run test:e2e` | Playwright e2e | 23 tests |
+| `npm run test:bdd` | Cucumber BDD | 23 scenarios |
 
 ## 9. Build & Deployment
 

@@ -1,0 +1,1642 @@
+[
+  {
+    "description": "  As a shopper\n  I want to manage items in my cart\n  So that I can review my order before checkout",
+    "elements": [
+      {
+        "description": "",
+        "id": "shopping-cart;empty-cart-shows-appropriate-message",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Empty cart shows appropriate message",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2203207445
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 157262389
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 141398834
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I navigate to the cart page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:20"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 82043445
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "I should see \"Your cart is empty\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2984269
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I should see \"Continue shopping\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 147028343
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "shopping-cart;cart-displays-a-product-added-from-the-details-page",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Cart displays a product added from the details page",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1962960884
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 130592438
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 13,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 155059782
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 14,
+            "name": "I click the \"Add to Cart\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 143972506
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 15,
+            "name": "I navigate to the cart page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:20"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 130548289
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "I should see \"Wireless Noise-Cancelling Headphones\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 267738293
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 17,
+            "name": "I should see the subtotal",
+            "match": {
+              "location": "features/step_definitions/cart_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 140548642
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "shopping-cart;changing-quantity-updates-the-line-total",
+        "keyword": "Scenario",
+        "line": 19,
+        "name": "Changing quantity updates the line total",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1929241522
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 124543711
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 20,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 178214761
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 21,
+            "name": "I click the \"Add to Cart\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 128578574
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 22,
+            "name": "I navigate to the cart page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:20"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 118547700
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 23,
+            "name": "I change the quantity of the first item to \"2\"",
+            "match": {
+              "location": "features/step_definitions/cart_steps.js:9"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 12217516
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 24,
+            "name": "the line total should be \"$159.98\"",
+            "match": {
+              "location": "features/step_definitions/cart_steps.js:15"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 159521811
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "shopping-cart;removing-the-only-cart-item-shows-empty-state",
+        "keyword": "Scenario",
+        "line": 26,
+        "name": "Removing the only cart item shows empty state",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1896231272
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 142271638
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 27,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 142839859
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 28,
+            "name": "I click the \"Add to Cart\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 115614139
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 29,
+            "name": "I navigate to the cart page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:20"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 125273229
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 30,
+            "name": "I remove the first item from the cart",
+            "match": {
+              "location": "features/step_definitions/cart_steps.js:22"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 21901030
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 31,
+            "name": "I should see \"Your cart is empty\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 139765102
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "shopping-cart;cart-persists-when-navigating-away-and-returning",
+        "keyword": "Scenario",
+        "line": 33,
+        "name": "Cart persists when navigating away and returning",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1877147700
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 118943697
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 34,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 151904820
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 35,
+            "name": "I click the \"Add to Cart\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 143590732
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 36,
+            "name": "I navigate to the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:24"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 379791434
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 37,
+            "name": "I navigate to the cart page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:20"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 88643189
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 38,
+            "name": "I should see \"Wireless Noise-Cancelling Headphones\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 139265967
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "shopping-cart;checkout-button-is-visible-in-a-non-empty-cart",
+        "keyword": "Scenario",
+        "line": 40,
+        "name": "Checkout button is visible in a non-empty cart",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1774320156
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 124774781
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 41,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 164688260
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 42,
+            "name": "I click the \"Add to Cart\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 126958784
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 43,
+            "name": "I navigate to the cart page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:20"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 88684012
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 44,
+            "name": "I should see \"Proceed to Checkout\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 150877813
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "shopping-cart",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Shopping Cart",
+    "tags": [],
+    "uri": "features/cart.feature"
+  },
+  {
+    "description": "  As a shopper\n  I want a persistent header on every page\n  So that I can navigate to the home page or cart at any time",
+    "elements": [
+      {
+        "description": "",
+        "id": "site-header;logo-is-visible-in-the-header",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "Logo is visible in the header",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1866225812
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 157575625
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 95007787
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I should see \"SampleShop\" in the header",
+            "match": {
+              "location": "features/step_definitions/header_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 149483614
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "site-header;cart-icon-is-present-in-the-header",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Cart icon is present in the header",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1886029825
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 142563954
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 58063034
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 13,
+            "name": "the header should contain a cart link",
+            "match": {
+              "location": "features/step_definitions/header_steps.js:11"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 133102714
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "site-header;cart-badge-is-hidden-when-the-cart-is-empty",
+        "keyword": "Scenario",
+        "line": 15,
+        "name": "Cart badge is hidden when the cart is empty",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1886772515
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 131550577
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 63419430
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 16,
+            "name": "the cart badge should not be visible",
+            "match": {
+              "location": "features/step_definitions/header_steps.js:16"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 158769510
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "site-header",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Site Header",
+    "tags": [],
+    "uri": "features/header.feature"
+  },
+  {
+    "description": "  As a shopper\n  I want to view the full details of a product\n  So that I can make an informed purchase decision",
+    "elements": [
+      {
+        "description": "",
+        "id": "product-details-page;product-information-is-displayed-for-a-valid-product",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Product information is displayed for a valid product",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1860034252
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 120256676
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 87627763
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "I should see \"Wireless Noise-Cancelling Headphones\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1992119
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I should see \"$79.99\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1930974
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I should see \"Premium wireless headphones\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 131265209
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-details-page;not-found-page-is-shown-for-an-invalid-product-id",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Not found page is shown for an invalid product id",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1799976518
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 136253434
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 13,
+            "name": "I navigate to product with id \"99999\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 82145028
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "I should see \"Product not found.\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1985478
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I should see \"Back to products\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 160372726
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-details-page;add-to-cart-and-buy-now-are-hidden-for-out-of-stock-products",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Add to Cart and Buy Now are hidden for out-of-stock products",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1858762948
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 136780704
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 18,
+            "name": "I navigate to the out-of-stock product page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:16"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 95088831
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "the \"Add to Cart\" button should not be visible",
+            "match": {
+              "location": "features/step_definitions/product_details_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2191095
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 20,
+            "name": "the \"Buy Now\" button should not be visible",
+            "match": {
+              "location": "features/step_definitions/product_details_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 121739108
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-details-page;user-adds-a-product-to-the-cart-and-sees-a-confirmation-message",
+        "keyword": "Scenario",
+        "line": 22,
+        "name": "User adds a product to the cart and sees a confirmation message",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1830796247
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 142069160
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 23,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 155527629
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 24,
+            "name": "I click the \"Add to Cart\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 10369319
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 25,
+            "name": "I should see a confirmation message",
+            "match": {
+              "location": "features/step_definitions/product_details_steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 124842031
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-details-page;cart-badge-updates-after-adding-a-product",
+        "keyword": "Scenario",
+        "line": 27,
+        "name": "Cart badge updates after adding a product",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1827227111
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 166655458
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 28,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 144004838
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "I click the \"Add to Cart\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 9940074
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "the cart badge should show \"1\"",
+            "match": {
+              "location": "features/step_definitions/header_steps.js:22"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 131745344
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-details-page;buy-now-adds-the-product-and-navigates-to-the-cart",
+        "keyword": "Scenario",
+        "line": 32,
+        "name": "Buy Now adds the product and navigates to the cart",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1857548165
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 118109527
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 33,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 221571431
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 34,
+            "name": "I click the \"Buy Now\" button",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 2865085
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 35,
+            "name": "the URL should be \"/cart\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:32"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 152275368
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-details-page;quantity-selector-is-capped-at-available-stock",
+        "keyword": "Scenario",
+        "line": 37,
+        "name": "Quantity selector is capped at available stock",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1864546637
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 123634301
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 38,
+            "name": "I navigate to product with id \"3\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 108646979
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 39,
+            "name": "the quantity selector should have \"8\" options",
+            "match": {
+              "location": "features/step_definitions/product_details_steps.js:17"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 151897791
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-details-page;back-link-returns-the-shopper-to-the-product-list",
+        "keyword": "Scenario",
+        "line": 41,
+        "name": "Back link returns the shopper to the product list",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1813723605
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 125733533
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 42,
+            "name": "I navigate to product with id \"1\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:12"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 216051478
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 43,
+            "name": "I click the back to products link",
+            "match": {
+              "location": "features/step_definitions/product_details_steps.js:28"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1012247
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 44,
+            "name": "the URL should be \"/\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:32"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 147439806
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "product-details-page",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Product Details Page",
+    "tags": [],
+    "uri": "features/product_details.feature"
+  },
+  {
+    "description": "  As a shopper\n  I want to browse all available products\n  So that I can find items to purchase",
+    "elements": [
+      {
+        "description": "",
+        "id": "product-list-page;all-10-products-are-displayed-by-default",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "All 10 products are displayed by default",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1899844327
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 125144809
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 97898868
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 10,
+            "name": "I should see 10 product cards",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 153295488
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-list-page;search-filters-products-by-name",
+        "keyword": "Scenario",
+        "line": 12,
+        "name": "Search filters products by name",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1835024854
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 140153338
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 85323313
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 13,
+            "name": "I type \"Wireless\" in the search box",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 9513528
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 14,
+            "name": "I should see a product named \"Wireless Noise-Cancelling Headphones\"",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:14"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 4523901
+            },
+            "arguments": [],
+            "keyword": "And ",
+            "line": 15,
+            "name": "I should not see a product named \"Yoga Mat\"",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:19"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 180959194
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-list-page;category-filter-narrows-the-product-list",
+        "keyword": "Scenario",
+        "line": 17,
+        "name": "Category filter narrows the product list",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1830492135
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 141631784
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 88947046
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 18,
+            "name": "I select the category \"Electronics\"",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:25"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 29151516
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 19,
+            "name": "I should see 3 product cards",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 131002564
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-list-page;empty-state-appears-when-no-products-match-the-search",
+        "keyword": "Scenario",
+        "line": 21,
+        "name": "Empty state appears when no products match the search",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1868888343
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 132581609
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 73168751
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 22,
+            "name": "I type \"zzznotfound\" in the search box",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:10"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 18877862
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 23,
+            "name": "I should see \"No products match your filters.\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 150552557
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-list-page;out-of-stock-products-display-an-out-of-stock-label",
+        "keyword": "Scenario",
+        "line": 25,
+        "name": "Out-of-stock products display an Out of stock label",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1856595527
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 125215122
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 63797856
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 26,
+            "name": "I should see \"Out of stock\" on the page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:43"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 179083617
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "product-list-page;clicking-a-product-card-navigates-to-the-detail-page",
+        "keyword": "Scenario",
+        "line": 28,
+        "name": "Clicking a product card navigates to the detail page",
+        "steps": [
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1862561486
+            },
+            "keyword": "Before",
+            "hidden": true
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 119714325
+            },
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 7,
+            "name": "I am on the home page",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:4"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 178186011
+            },
+            "arguments": [],
+            "keyword": "When ",
+            "line": 29,
+            "name": "I click on the first product card",
+            "match": {
+              "location": "features/step_definitions/product_list_steps.js:29"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 1484219
+            },
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 30,
+            "name": "the URL should contain \"/products/\"",
+            "match": {
+              "location": "features/step_definitions/common_steps.js:38"
+            }
+          },
+          {
+            "result": {
+              "status": "passed",
+              "duration": 223653380
+            },
+            "keyword": "After",
+            "hidden": true
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "product-list-page",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Product List Page",
+    "tags": [],
+    "uri": "features/product_list.feature"
+  }
+]

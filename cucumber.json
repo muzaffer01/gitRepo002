@@ -1,0 +1,14 @@
+{
+  "default": {
+    "paths": ["features/**/*.feature"],
+    "import": [
+      "features/support/**/*.js",
+      "features/step_definitions/**/*.js"
+    ],
+    "format": [
+      "progress-bar",
+      "json:reports/cucumber-report.json"
+    ],
+    "parallel": 1
+  }
+}
