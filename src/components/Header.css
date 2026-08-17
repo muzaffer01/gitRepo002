@@ -1,0 +1,42 @@
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.5rem;
+  background: #131921;
+  color: #fff;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #f90;
+  text-decoration: none;
+}
+
+.cart-link {
+  position: relative;
+  font-size: 1.4rem;
+  color: #fff;
+  text-decoration: none;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background: #f90;
+  color: #131921;
+  font-size: 0.65rem;
+  font-weight: 700;
+  border-radius: 50%;
+  min-width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 3px;
+}
